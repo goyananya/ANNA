@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab3 zadanie 1</title>
+    <script src="angularJs.js"></script>
+    <script src="javascript.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+    <div ng-app="workApp" ng-controller="workCtrl">
+        <form method="post" ng-model="form" name="form">
+            <p><b>Заполнение формы:</b></p>
+            <div>
+                <label for="Name">Имя: </label>
+                <input type="text" id="Name" placeholder="Имя" ng-model="f.Name" name="f.Name" required><br>
+                <span  ng-show="f.Name.$dirty && form.Name.$invalid">Ваше имя</span>
+            </div><br>
+
+            <div>
+                <label for="sName">Фамилия: </label>
+                <input type="text" id="sName" placeholder="Фамилия" ng-model="f.sName" name="f.sName" required><br>
+                <span  ng-show="f.sName.$dirty && form.sName.$invalid">Ваша фамилия</span>
+            </div><br>
+
+            <div>
+                <label for="patronic">Отчество: </label>
+                <input type="text" id="patronic" placeholder="Отчество" ng-model="f.patronic" name="f.patronic" required><br>
+                <span  ng-show="f.patron.$dirty && form.patron.$invalid">Ваше отчество</span>
+            </div><br>
+
+            <p><b>Дата рождения:</b></p>
+            <input type="date" ng-model="bd.value">
+
+            <p><b>Пол:</b></p>
+
+            <div ng-repeat = "x in Pol">
+                <label for="{{x.idName}}">{{x.name}}</label>
+                <input type="checkbox" id="{{x.idName}}" ng-model="x.checked" ng-click="updSelection($index, Pol)">
+                <br>
+            </div>
+
+            <p><b>Ваше образование:</b></p>
+
+            <div class="radio">
+                <div ng-repeat="x in educations">
+                    <label for="{{x.idName}}">{{x.name}}</label>
+                    <input type="radio" id="{{x.idName}}" name="education" ng-model="x.checked">
+                </div>
+            </div>
+
+            <p><b>Отдел:</b></p>
+            <select ng-model="selectedV">
+                <option value="{{x}}" ng-repeat="x in vacancies" >{{x}}</option>
+            </select>
+
+            <p><b>Зарплата:</b></p>
+            <div class="salary">
+                <input type="number" id="salary" name="f.salary" ng-model="f.salary" placeholder="Зарплата">MDL
+            </div><br>
+        </form>
+
+        <div>
+            <button ng-if="f.salary&#62;5000 && f.salary&#60;20000" 
+            ng-disabled="f.$invalid" ng-click="ShowOutput()">Отправить</button>
+            <button name="reset" ng-model="reset" ng-click="reset()">Сброс</button>
+        </div> <br>
+
+       
+        <div ng-show="output">
+            Фамилия: {{f.Name}}<br>
+            Имя: {{f.sName}}<br>
+            Отчество: {{f.patronic}}<br>
+            Дата рождения: {{bd.value | date:'medium'}}<br>
+            Вакансия: {{selectedV}}<br>
+            Зарплата: {{f.salary}}
+        </div>
+    </div>
+</body>
+</html>
