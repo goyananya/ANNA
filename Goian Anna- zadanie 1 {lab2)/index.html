@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab2</title>
+    <script src="angularJs.js"></script>
+    <style>#form1 {
+        margin:1em 0;
+        padding-top:10px;
+        background:url(../images/form/form_top.gif) no-repeat 0 0;
+        }
+        #form1 fieldset {
+        margin:0;
+        padding:0;
+        border:none;
+        float:left;
+        display:inline;
+        width:26px;
+        margin-left:25px;
+        }             
+        #form1 p {margin:.5em 0;}
+        #form1 label {display:block;}
+        #form1 input, #form1 textarea {
+        width:150px;
+        border:1px solid #ddd;
+        -moz-border-radius:.3em;
+        -webkit-border-radius:.3em;
+        border-radius:.3em;
+        background:#fff url(../images/form/form_input.gif) repeat-x;
+        padding:3px;
+        }
+        #form1 textarea {
+        height:125px;
+        overflow:auto;
+        }
+      </style>
+    <script>
+        var app = angular.module('workApp', []).controller('workCtrl', function($scope){
+    $scope.firstName = "Anna";
+    $scope.secName = "Goian";
+    $scope.dateofbirth = { 
+                value: new Date(1999, 8, 10)
+            };
+    $scope.ok = 7; 
+    $scope.list = [
+    'Matematica', 
+'Informatica', 
+'Pricladnaia Informatica',
+'Chimie',
+'Limba rusa',
+'Сomputer technology',
+'Megement',
+'Drept',
+'Doctor',
+'Ferma', 
+'Bilogia', 
+'Shopper',
+'Flap', 
+'Tote', 
+'Frame',
+'Wrislet'
+    ];
+})
+    </script>
+</head>
+<body>
+    <div class="app">
+        <div ng-app="workApp" ng-controller="workCtrl">
+            <form id="form1" action="/" method="post">
+               <h4> <label for="f_name"  text-align: center;>Имя: </label>
+                <input type="text" id="f_name" ng-model="firstName" placeholder="введи своё имя"><br>
+        
+                <label for="s_name">Фамилия: </label>
+                <input type="text" id="s_name" ng-model="secName" placeholder="введи свою фамилию"><br> </h4>
+
+                <label for="dateofbirth">Дата рождения: </label>
+            <input type="date" id="dateofbirth" ng-model="bd.value"><br>
+    
+
+                <label for="ok">Оценка: </label>
+                <input type="number" id="ok" ng-model="ok" placeholder="введи количество леев"><br>
+
+                
+                
+                <label for="otdeli">Фалькутет: </label><br>
+                <input type="search" ng-model="search" placeholder="Введи поиск">
+            </form>
+          <h4>  Полное имя: {{ firstName + " " + secName }}<br> </h4>
+            Дата рождения:{{dateofbirth.value | date:'medium'}}<br>
+            Оценка: {{ ok }}<br>
+            Факультет:
+            <ul >
+                <li ng-repeat="x in list | filter:search" >
+                    {{ x }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
